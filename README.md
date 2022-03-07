@@ -19,3 +19,4 @@ In diesem Abschnitt findest du Links, welche in den Videos beschriebene Themen v
 
 - [ReactJS](https://reactjs.org/)
   - [Introducing Hooks](https://reactjs.org/docs/hooks-intro.html)
+  - [Hooks API Reference](https://reactjs.org/docs/hooks-reference.html)
