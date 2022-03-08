@@ -12,6 +12,7 @@ Zu welchem Video findest du Code in welchem Ordner?
 - [useState Hook](https://youtu.be/mSxaCMZEUjk): [use-state-hook](./use-state-hook)
   - [Offizielle Einführung](https://reactjs.org/docs/hooks-state.html)
 - [useEffect Hook](https://youtu.be/VcbKmI5iyrk): [use-effect-hook](./use-effect-hook)
+- [useMemo Hook](https://youtu.be/ROFPUKcLVZc): [use-memo-hook](./use-memo-hook)
 
 ## Links, die dich interessieren könnten
 
