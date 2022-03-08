@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { DemoUserLoadingComponent } from "./DemoUserLoadingComponent";
+import { Demo } from "./Demo";
 
 function App() {
   console.log("Rerender App");
@@ -10,7 +10,7 @@ function App() {
         <h1>Use Memo Hook Demo</h1>
       </header>
       <main className="AppMain">
-        <DemoUserLoadingComponent />
+        <Demo />
       </main>
     </div>
   );
