@@ -15,7 +15,7 @@ jest.mock("../cache/userCache", () => {
 
 const userCacheMock = {
     getOrRetrieveUsers: userCache.getOrRetrieveUsers as jest.MockedFunction<typeof userCache.getOrRetrieveUsers>
-}
+};
 
 describe("userService tests", () => {
     beforeEach(() => {
