@@ -1,7 +1,5 @@
 import { userService } from "./userService";
-
 import { userCache } from "../cache/userCache";
-
 
 jest.mock("../cache/userCache", () => {
     const actual = jest.requireActual("../cache/userCache");
@@ -35,10 +33,8 @@ describe("userService tests", () => {
             expect(result).toEqual([]);
         });
 
-        it("Given one user exists, when getUserDtos is called, then it returns the user in array.", async () => {
+        it("Given one user exists, when getUserDtos is called, then getOrRetrieveUsers has been called from cache.", async () => {
             // arrange:
-            const userArray = [{ name: "TestUser" }];
-            userCacheMock.getOrRetrieveUsers.mockImplementation(() => Promise.resolve(userArray))
             const getUserDtos = userService.getUserDtos;
 
             // act
@@ -47,10 +43,8 @@ describe("userService tests", () => {
             // assert
             expect(userCacheMock.getOrRetrieveUsers).toBeCalled();
         });
-        it("Given one user exists, when getUserDtos is called, then it returns the user in array.", async () => {
+        it("Given one user exists, when getUserDtos is called, then getOrRetrieveUsers has been called from cache once.", async () => {
             // arrange:
-            const userArray = [{ name: "TestUser" }];
-            userCacheMock.getOrRetrieveUsers.mockImplementation(() => Promise.resolve(userArray))
             const getUserDtos = userService.getUserDtos;
 
             // act
@@ -95,6 +89,18 @@ describe("userService tests", () => {
 
             // assert
             expect(result[0]).not.toBe(userArray[0]);
+        });
+        it("Given at least one user exists, when getUserDtos is called, then it does not return the same number of user in array.", async () => {
+            // arrange:
+            const userArray = [{ name: "TestUser" }];
+            userCacheMock.getOrRetrieveUsers.mockImplementation(() => Promise.resolve(userArray))
+            const getUserDtos = userService.getUserDtos;
+
+            // act
+            const result = await getUserDtos();
+
+            // assert
+            expect(result.length).toBe(userArray.length);
         });
     });
 
