@@ -42,7 +42,7 @@ describe("userService tests", () => {
             const getUserDtos = userService.getUserDtos;
 
             // act
-            const result = await getUserDtos();
+            await getUserDtos();
 
             // assert
             expect(userCacheMock.getOrRetrieveUsers).toBeCalled();
@@ -54,7 +54,7 @@ describe("userService tests", () => {
             const getUserDtos = userService.getUserDtos;
 
             // act
-            const result = await getUserDtos();
+            await getUserDtos();
 
             // assert
             expect(userCacheMock.getOrRetrieveUsers).toBeCalledTimes(1);
