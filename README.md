@@ -10,7 +10,7 @@ Wie immer im Internet gilt auch hier: Wenn du unsicher bist, klick nicht auf den
 Zu welchem Video findest du Code in welchem Ordner?
 
 ### Videos, die nicht "nur" React Hooks im Fokus haben 
-- [Jest, Mocks und Unittests: Ich hab da mal ne Frage](https://youtu.be/umsmwcyapTI): [use-callback-hook](./q_and_a/good-testing-bad-testing)
+- [Jest, Mocks und Unittests: Ich hab da mal ne Frage](https://youtu.be/umsmwcyapTI): [q_and_a/good-testing-bad-testing](./q_and_a/good-testing-bad-testing)
 
 ### Videos zu React Hooks
 - [useState Hook](https://youtu.be/mSxaCMZEUjk): [use-state-hook](./use-state-hook)
