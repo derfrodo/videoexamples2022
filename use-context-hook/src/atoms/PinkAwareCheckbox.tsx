@@ -9,14 +9,11 @@ export const PinkAwareCheckbox = (props: {
 }) => {
   const { isPink, checked, onChange, children, id } = props;
   return (
-    <>
+    <span>
       <input
         className="PinkAwareCheckboxInput"
         style={{
-          backgroundColor: "white",
-          // color: isPink ? "pink" : "black",
           borderColor: isPink ? "pink" : "black",
-          padding: 4,
         }}
         checked={checked}
         type={"checkbox"}
@@ -29,6 +26,6 @@ export const PinkAwareCheckbox = (props: {
       >
         {children}
       </label>
-    </>
+    </span>
   );
 };
