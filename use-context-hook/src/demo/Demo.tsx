@@ -7,23 +7,11 @@ import {
   useState,
 } from "react";
 import { PinkAwareButton } from "../atoms/PinkAwareButton";
-import { PinkAwareCheckbox } from "../atoms/PinkAwareCheckbox";
 import "./demo.css";
 import { AppLanguages, getIntlResolver } from "../services/badProgrammedI18n";
-
-type DemoContextType = {
-  isPink: boolean;
-  setIsPink: React.Dispatch<React.SetStateAction<boolean>>;
-  lang: AppLanguages;
-  setLang: React.Dispatch<React.SetStateAction<AppLanguages>>;
-};
-
-const DemoContext = createContext<DemoContextType>({
-  isPink: false,
-  setIsPink: () => {},
-  lang: "en",
-  setLang: () => {},
-});
+import { ToggleLanguage } from "./ToggleLanguage";
+import { DemoContext } from "./DemoContext";
+import { TogglePinkishness } from "./TogglePinkishness";
 
 export const Demo = () => {
   console.log("Demo rerenders");
@@ -75,32 +63,3 @@ export const Demo = () => {
     </div>
   );
 };
-
-const ToggleLanguage = memo(() => {
-  console.log("ToggleLanguage rerenders");
-  const { isPink, lang, setLang } = useContext(DemoContext);
-  const getMessage = useMemo(() => getIntlResolver(lang), [lang]);
-  return (
-    <PinkAwareButton
-      isPink={isPink}
-      onClick={() => setLang((p) => (p === "en" ? "de" : "en"))}
-    >
-      {getMessage("lang")}
-    </PinkAwareButton>
-  );
-});
-
-const TogglePinkishness = memo(() => {
-  console.log("TogglePinkishness rerenders");
-  const { isPink, setIsPink } = useContext(DemoContext);
-  return (
-    <PinkAwareCheckbox
-      isPink={isPink}
-      id="TogglePink"
-      checked={isPink}
-      onChange={() => setIsPink((p) => !p)}
-    >
-      🎨
-    </PinkAwareCheckbox>
-  );
-});
