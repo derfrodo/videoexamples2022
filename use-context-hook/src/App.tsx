@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import "./App.css";
-import { Demo } from "./Demo";
+import { Demo } from "./demo/Demo";
 import { getIntlResolver } from "./services/badProgrammedI18n";
 
 function App() {

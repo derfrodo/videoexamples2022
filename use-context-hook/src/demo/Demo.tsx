@@ -6,10 +6,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { PinkAwareButton } from "./atoms/PinkAwareButton";
-import { PinkAwareCheckbox } from "./atoms/PinkAwareCheckbox";
+import { PinkAwareButton } from "../atoms/PinkAwareButton";
+import { PinkAwareCheckbox } from "../atoms/PinkAwareCheckbox";
 import "./demo.css";
-import { AppLanguages, getIntlResolver } from "./services/badProgrammedI18n";
+import { AppLanguages, getIntlResolver } from "../services/badProgrammedI18n";
 
 type DemoContextType = {
   isPink: boolean;
@@ -75,6 +75,7 @@ export const Demo = () => {
     </div>
   );
 };
+
 const ToggleLanguage = memo(() => {
   console.log("ToggleLanguage rerenders");
   const { isPink, lang, setLang } = useContext(DemoContext);
