@@ -1,26 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Demo } from "./Demo";
+import { getUserFromApi } from "./services/fakeApi";
 import type { AppUser } from "./types/AppUser";
-
-const wait = async (delayInMs: number) => {
-  return new Promise((r) => setTimeout(r, delayInMs));
-};
-
-const getUserFromApi = async (): Promise<AppUser[]> => {
-  await wait(2000);
-
-  return [
-    { name: "DerFrodo", hasHairyFeet: true },
-    { name: "DerFuchs", hasHairyFeet: false },
-  ];
-};
 
 const reloadAtRerenders = 4;
 
 export const DemoUserLoadingComponent: React.FC = () => {
   console.log("Rerender UserLoadingComponent");
-  const [reloadUsers, setReloadUsers] = useState(true);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [rerenderCount, setRerender] = useState(0);
   const [appUsers, setAppUsers] = useState<AppUser[]>([]);
@@ -38,56 +24,34 @@ export const DemoUserLoadingComponent: React.FC = () => {
   }, []);
 
   const reloadUsersIfActivated = useCallback(() => {
-    if (reloadUsers) {
-      setLoadingUsers((p) => {
-        if (!p) {
-          loadUsers();
-        }
-        return true;
-      });
-    } else {
-      console.log("Could have reloaded users, but flag is set to false");
-    }
-  }, [loadUsers, reloadUsers]);
+    setLoadingUsers((p) => {
+      if (!p) {
+        loadUsers();
+      }
+      return true;
+    });
+  }, [loadUsers]);
+
+  const rerendersRemainUntilReloadUsers = useMemo(
+    () => rerenderCount % reloadAtRerenders,
+    [rerenderCount]
+  );
 
   useEffect(() => {
-    if (rerenderCount % reloadAtRerenders === 0) {
+    if (rerendersRemainUntilReloadUsers === 0) {
       reloadUsersIfActivated();
     } else {
       console.log(
         "No matching rerender count. Users will not be reloaded due to rerenders."
       );
     }
-  }, [reloadUsersIfActivated, rerenderCount]);
-
-  const calcPadding = useCallback(
-    () => 8 + rerenderCount,
-    [rerenderCount]
-  );
-
+  }, [reloadUsersIfActivated, rerendersRemainUntilReloadUsers]);
 
   return (
     <>
-      <button onClick={() => setRerender((p) => p + 1)}>Rerender</button>
-      <div>
-        <input
-          type="checkbox"
-          id="togglereload"
-          checked={reloadUsers}
-          onChange={() => setReloadUsers((p) => !p)}
-        />
-        <label htmlFor="togglereload">Lade Benutzer neu</label>
-      </div>
-      {reloadUsers ? (
-        <CoolButtonFromExternalLib
-          onClick={() => loadUsers()}
-          calculatePadding={calcPadding}
-        >
-          Reload Users
-        </CoolButtonFromExternalLib>
-      ) : (
-        ""
-      )}
+      <CoolButtonFromExternalLib onClick={() => setRerender((p) => p + 1)}>
+        Rerender
+      </CoolButtonFromExternalLib>
       <div style={{ padding: "8px 0" }}>
         <Demo appUsers={appUsers} />
       </div>
@@ -95,7 +59,9 @@ export const DemoUserLoadingComponent: React.FC = () => {
       <div>
         {loadingUsers
           ? "Loading users, please be patient!"
-          : `Users loaded. Will refetch users for after clicking rerender ${reloadAtRerenders} times!`}
+          : `Users loaded. Will refetch users for after ${
+              reloadAtRerenders - rerendersRemainUntilReloadUsers
+            } more rerenders (load users every ${reloadAtRerenders} times)!`}
       </div>
     </>
   );

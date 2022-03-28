@@ -1,0 +1,10 @@
+.PinkAwareButton {
+  background-color: white;
+  padding: 4px;
+  border-style: solid;
+}
+
+.PinkAwareButton:hover {
+  background-color: #fcfcfc;
+  cursor: pointer;
+}

@@ -1,0 +1,56 @@
+.App {
+  padding: 8px;
+}
+
+.App-header {
+  text-align: center;
+}
+
+.AppMain {
+  width: 1024px;
+  margin: auto;
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+  .AppMain {
+    width: 800px;
+  }
+}
+@media (max-width: 600px) {
+  .AppMain {
+    width: 100%;
+  }
+}
+
+table {
+  border: "1px solid black";
+}
+
+td,
+th {
+  padding: 4px;
+}
+
+table,
+tbody {
+  border: 1px solid #000000;
+  border-collapse: collapse;
+}
+table,
+tbody {
+  border: 1px solid #000000;
+  border-collapse: collapse;
+}
+
+table td {
+  border-spacing: "collapse";
+  border-collapse: collapse;
+}
+
+table td:not(:last-child),
+table th:not(:last-child) {
+  border-right: 1px solid #acacac;
+}
+table tr:not(:last-child) td {
+  border-bottom: 1px solid #acacac;
+}
