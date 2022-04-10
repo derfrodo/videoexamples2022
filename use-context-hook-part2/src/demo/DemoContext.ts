@@ -4,8 +4,8 @@ import type { PinkishState } from "./TogglePinkishness";
 
 
 export type DemoContextType = PinkishState & LanguageState & {
-  todos: TodoCategory[]
-  setTodos: React.Dispatch<React.SetStateAction<TodoCategory[]>>;
+  cows: CowCategory[]
+  setCows: React.Dispatch<React.SetStateAction<CowCategory[]>>;
 };
 
 export const DemoContext = createContext<DemoContextType>({
@@ -13,17 +13,28 @@ export const DemoContext = createContext<DemoContextType>({
   setIsPink: () => { },
   lang: "en",
   setLang: () => { },
-  todos: [],
-  setTodos: () => { },
+  cows: [],
+  setCows: () => { },
 });
 
-export type TodoCategory = {
+export type CowCategory = {
   name: string;
-  items: Todo[];
+  items: CattleCounts[];
 };
 
-export type Todo = {
-  date: string,
-  title: string,
-  done: boolean,
+export type CattleCounts = {
+  visited?: boolean,
+  cattleTotal: number | null,
+  countByTypes: {
+    milkCows: number | null,
+    otherCows: number | null,
+  },
+  countByGender: {
+    male: number | null,
+    female: number | null,
+  },
+  date: string | null,
+  entryType: string,
+  idNumber: string | null,
+  locationName: string | null,
 }

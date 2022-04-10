@@ -1,24 +1,19 @@
-import {
-  createContext,
-  memo,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PinkAwareButton } from "../atoms/PinkAwareButton";
-import "./demo.css";
 import { AppLanguages, getIntlResolver } from "../services/badProgrammedI18n";
+import "./demo.css";
+import { DemoContext, CowCategory } from "./DemoContext";
 import { ToggleLanguage } from "./ToggleLanguage";
 import { TogglePinkishness } from "./TogglePinkishness";
-import { DemoContext, TodoCategory } from "./DemoContext";
+
+import { getTodos } from "./FakeCowServer";
 
 export const Demo = () => {
   console.log("Demo rerenders");
 
   const [lang, setLang] = useState<AppLanguages>("de");
   const [isPink, setIsPink] = useState(false);
-  const [todos, setTodos] = useState<TodoCategory[]>([]);
+  const [todos, setTodos] = useState<CowCategory[]>([]);
 
   const [manualRerenderCount, setManualRerenderCount] = useState<number>(0);
   const triggerManualRerender = useCallback(
@@ -27,14 +22,22 @@ export const Demo = () => {
   );
   const getMessage = useMemo(() => getIntlResolver(lang), [lang]);
 
+  useEffect(() => {
+    getTodos();
+  }, []);
+
   return (
     <div className="demo">
       <h2>Demonstration inside 😎</h2>
       <section>
         <DemoContext.Provider
-          value={{ lang, setLang, isPink, setIsPink, todos, setTodos }}
+          value={{ lang, setLang, isPink, setIsPink, cows: todos, setCows: setTodos }}
         >
-          <div className="demoContentContainer flexContainer">
+          <div
+            className={
+              "demoContentContainer flexContainer" + (isPink ? " pink" : "")
+            }
+          >
             <TogglePinkishness />
             <div style={{ width: "30%" }} />
             <ToggleLanguage />

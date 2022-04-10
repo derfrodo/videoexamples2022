@@ -4,6 +4,11 @@
   border-style: solid;
 }
 
+.pink .PinkAwareButton {
+  color: pink;
+}
+
+
 .PinkAwareButton:hover {
   background-color: #fcfcfc;
   cursor: pointer;
