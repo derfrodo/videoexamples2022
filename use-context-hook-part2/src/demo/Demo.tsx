@@ -11,13 +11,14 @@ import "./demo.css";
 import { AppLanguages, getIntlResolver } from "../services/badProgrammedI18n";
 import { ToggleLanguage } from "./ToggleLanguage";
 import { TogglePinkishness } from "./TogglePinkishness";
-import { DemoContext } from "./DemoContext";
+import { DemoContext, TodoCategory } from "./DemoContext";
 
 export const Demo = () => {
   console.log("Demo rerenders");
 
   const [lang, setLang] = useState<AppLanguages>("de");
   const [isPink, setIsPink] = useState(false);
+  const [todos, setTodos] = useState<TodoCategory[]>([]);
 
   const [manualRerenderCount, setManualRerenderCount] = useState<number>(0);
   const triggerManualRerender = useCallback(
@@ -30,7 +31,9 @@ export const Demo = () => {
     <div className="demo">
       <h2>Demonstration inside 😎</h2>
       <section>
-        <DemoContext.Provider value={{ lang, setLang, isPink, setIsPink }}>
+        <DemoContext.Provider
+          value={{ lang, setLang, isPink, setIsPink, todos, setTodos }}
+        >
           <div className="demoContentContainer flexContainer">
             <TogglePinkishness />
             <div style={{ width: "30%" }} />

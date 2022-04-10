@@ -1,0 +1,19 @@
+.demoContentContainer {
+  padding: 8px;
+  border: 1px solid #8b8b8b;
+  border-radius: 8px;
+}
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.demo {
+  padding: 8px;
+}
+
+.demo section:not(:last-child) {
+  margin-bottom: 16px;
+}
